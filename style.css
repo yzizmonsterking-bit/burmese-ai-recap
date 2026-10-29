@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Burmese AI Movie Recap</title>
+    <meta
+      name="description"
+      content="A cinematic movie recap generator inspired by Burmese storytelling."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">🎬</span>
+          <span>Burmese AI Movie Recap</span>
+        </div>
+        <button class="ghost-button" id="randomMovieBtn">Random Pick</button>
+      </header>
+
+      <main class="hero">
+        <section class="hero-copy">
+          <p class="eyebrow">AI-powered storytelling</p>
+          <h1>Turn any movie title into a quick cinematic recap.</h1>
+          <p class="subtitle">
+            Discover short, engaging summaries for popular films and hidden gems.
+          </p>
+
+          <div class="search-panel">
+            <label class="sr-only" for="movieInput">Movie title</label>
+            <input
+              id="movieInput"
+              type="text"
+              placeholder="Type a movie title..."
+              value="The Great Escape"
+            />
+            <button id="generateBtn">Generate Recap</button>
+          </div>
+
+          <div class="popular-tags" id="popularTags">
+            <button class="tag active" data-movie="The Great Escape">The Great Escape</button>
+            <button class="tag" data-movie="A Beautiful Mind">A Beautiful Mind</button>
+            <button class="tag" data-movie="Spirited Away">Spirited Away</button>
+            <button class="tag" data-movie="Inception">Inception</button>
+          </div>
+        </section>
+
+        <aside class="movie-card" id="movieCard">
+          <div class="poster-area">
+            <div class="poster-glow"></div>
+            <div class="poster-content">
+              <span class="poster-label">Now Showing</span>
+              <h2 id="movieTitle">The Great Escape</h2>
+            </div>
+          </div>
+
+          <div class="meta-row">
+            <span id="movieGenre">War / Drama</span>
+            <span id="movieRuntime">2h 14m</span>
+          </div>
+
+          <div class="summary-box">
+            <h3>Recap</h3>
+            <p id="movieSummary">
+              A group of prisoners, burdened by the harsh realities of war, devise a daring plan to escape captivity and reclaim their freedom.
+            </p>
+          </div>
+
+          <ul class="highlight-list" id="movieHighlights">
+            <li>Plans the escape under extreme pressure.</li>
+            <li>Faces fear, betrayal, and impossible odds.</li>
+            <li>Turns desperation into a bold act of hope.</li>
+          </ul>
+        </aside>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

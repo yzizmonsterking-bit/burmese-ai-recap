@@ -1,13 +1,139 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Burmese AI Movie Recap</title>
-</head>
-<body>
-  <h1>🎬 Burmese AI Movie Recap</h1>
-  <p>Welcome to my first AI Movie Recap Website.</p>
+const movieDatabase = {
+  "The Great Escape": {
+    title: "The Great Escape",
+    genre: "War / Drama",
+    runtime: "2h 14m",
+    summary:
+      "A group of prisoners in a German POW camp transform desperation into a courageous plan to break free, facing danger at every step while holding onto hope.",
+    highlights: [
+      "Builds a meticulous escape strategy under brutal conditions.",
+      "Explores loyalty, fear, and the will to survive.",
+      "Ends with a tense, emotional push for freedom."
+    ]
+  },
+  "A Beautiful Mind": {
+    title: "A Beautiful Mind",
+    genre: "Biography / Drama",
+    runtime: "2h 15m",
+    summary:
+      "A brilliant mathematician battles schizophrenia while chasing revolutionary ideas, courageously redefining what success and hope can mean.",
+    highlights: [
+      "Shows the cost of genius and illness.",
+      "Celebrates resilience, love, and persistence.",
+      "Blends intellect with deep emotional struggle."
+    ]
+  },
+  "Spirited Away": {
+    title: "Spirited Away",
+    genre: "Fantasy / Adventure",
+    runtime: "2h 5m",
+    summary:
+      "When a young girl falls into a magical world, she must outwit bizarre spirits and uncover her own courage to return home.",
+    highlights: [
+      "Features stunning imagination and vivid world-building.",
+      "Captures wonder, danger, and self-discovery.",
+      "Turns a surreal journey into a heartfelt coming-of-age tale."
+    ]
+  },
+  "Inception": {
+    title: "Inception",
+    genre: "Sci-Fi / Thriller",
+    runtime: "2h 28m",
+    summary:
+      "A skilled extractor enters layered dreams to plant an idea inside a target's mind, forcing the team to navigate shifting realities and impossible stakes.",
+    highlights: [
+      "Uses dreams within dreams to create a mind-bending puzzle.",
+      "Combines emotional tension with cerebral action.",
+      "Builds toward a breathtaking, unforgettable finale."
+    ]
+  }
+};
 
-  <input type="text" placeholder="Movie Title">
-  <button>Generate</button>
-</body>
-</html>
+const movieTitle = document.getElementById("movieTitle");
+const movieGenre = document.getElementById("movieGenre");
+const movieRuntime = document.getElementById("movieRuntime");
+const movieSummary = document.getElementById("movieSummary");
+const movieHighlights = document.getElementById("movieHighlights");
+const movieInput = document.getElementById("movieInput");
+const generateBtn = document.getElementById("generateBtn");
+const randomMovieBtn = document.getElementById("randomMovieBtn");
+const tagButtons = document.querySelectorAll(".tag");
+
+function renderMovie(movie) {
+  movieTitle.textContent = movie.title;
+  movieGenre.textContent = movie.genre;
+  movieRuntime.textContent = movie.runtime;
+  movieSummary.textContent = movie.summary;
+  movieHighlights.innerHTML = movie.highlights
+    .map((item) => `<li>${item}</li>`)
+    .join("");
+}
+
+function findMovie(key) {
+  const normalizedKey = key.trim();
+
+  if (!normalizedKey) {
+    return movieDatabase["The Great Escape"];
+  }
+
+  const directMatch = movieDatabase[normalizedKey];
+  if (directMatch) {
+    return directMatch;
+  }
+
+  const fuzzyMatch = Object.keys(movieDatabase).find((movieName) =>
+    movieName.toLowerCase().includes(normalizedKey.toLowerCase())
+  );
+
+  if (fuzzyMatch) {
+    return movieDatabase[fuzzyMatch];
+  }
+
+  return {
+    title: normalizedKey,
+    genre: "Original / Drama",
+    runtime: "1h 58m",
+    summary:
+      `A mysterious character enters a challenging journey, where choices, loyalty, and courage shape a story that feels both intimate and epic.`,
+    highlights: [
+      "Builds tension through emotional stakes and unpredictable turns.",
+      "Features a compelling character arc and dramatic payoff.",
+      "Creates a memorable cinematic experience with strong visual energy."
+    ]
+  };
+}
+
+function generateRecap() {
+  const movie = findMovie(movieInput.value || "The Great Escape");
+  renderMovie(movie);
+}
+
+generateBtn.addEventListener("click", generateRecap);
+movieInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    generateRecap();
+  }
+});
+
+randomMovieBtn.addEventListener("click", () => {
+  const entries = Object.keys(movieDatabase);
+  const randomMovie = entries[Math.floor(Math.random() * entries.length)];
+  movieInput.value = randomMovie;
+  generateRecap();
+});
+
+tagButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    tagButtons.forEach((tag) => tag.classList.remove("active"));
+    button.classList.add("active");
+    movieInput.value = button.dataset.movie;
+    generateRecap();
+  });
+});
+
+renderMovie(movieDatabase["The Great Escape"]);
+
+const currentYear = new Date().getFullYear();
+console.log(`Burmese AI Movie Recap is ready. © ${currentYear}`);
+
+
